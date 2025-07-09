@@ -6,12 +6,25 @@ export default class Tree {
         this.root = this.#buildTree(array);
     }
 
+    prettyPrint(node = this.root, prefix = '', isLeft = true) {
+        if (node === null) {
+            return;
+        }
+        if (node.right !== null) {
+            this.prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+        }
+        console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value}`);
+        if (node.left !== null) {
+            this.prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+        }
+    }
+
     #buildTree(array) {
         return this.#buildTreeHelper(array, 0, array.length - 1);
     }
 
     #buildTreeHelper(array, startIndex, endIndex) {
-        if(startIndex > endIndex) {
+        if (startIndex > endIndex) {
             return null;
         }
 
