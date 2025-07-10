@@ -6,6 +6,26 @@ export default class Tree {
         this.root = this.#buildTree(array);
     }
 
+    insert(root, newValue) {
+        if(root === null) {
+            return new Node(newValue);
+        }
+        // Cannot insert duplicate values
+        else if(root.value === newValue) {
+            return root;
+        }
+        else {
+            if(newValue > root.value) {
+                root.right = this.insert(root.right, newValue);
+            }
+            else if(newValue < root.value) {
+                root.left = this.insert(root.left, newValue);
+            }
+
+            return root;
+        }
+    }
+
     prettyPrint(node = this.root, prefix = '', isLeft = true) {
         if (node === null) {
             return;
