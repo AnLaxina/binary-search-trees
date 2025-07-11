@@ -6,24 +6,8 @@ export default class Tree {
         this.root = this.#buildTree(array);
     }
 
-    insert(root, newValue) {
-        if(root === null) {
-            return new Node(newValue);
-        }
-        // Cannot insert duplicate values
-        else if(root.value === newValue) {
-            return root;
-        }
-        else {
-            if(newValue > root.value) {
-                root.right = this.insert(root.right, newValue);
-            }
-            else if(newValue < root.value) {
-                root.left = this.insert(root.left, newValue);
-            }
-
-            return root;
-        }
+    insert(newValue) {
+        this.root = this.#insertRecursively(this.root, newValue);
     }
 
     prettyPrint(node = this.root, prefix = '', isLeft = true) {
@@ -56,5 +40,23 @@ export default class Tree {
         rootNode.right = this.#buildTreeHelper(array, middleIndex + 1, endIndex);
 
         return rootNode;
+    }
+
+    #insertRecursively(node, newValue) {
+        if (node === null) {
+            return new Node(newValue);
+        }
+        // Cannot insert duplicate values
+        if (newValue === node.value) {
+            return node;
+        }
+
+        if (newValue < node.value) {
+            node.left = this.#insertRecursively(node.left, newValue);
+        } else {
+            node.right = this.#insertRecursively(node.right, newValue);
+        }
+
+        return node;
     }
 }

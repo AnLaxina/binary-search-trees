@@ -5,5 +5,5 @@ const coolTree = new Tree(coolArray);
 console.log('Here is the initial tree before insert: ');
 coolTree.prettyPrint();
 console.log('Here it is after insert:');
-coolTree.insert(coolTree.root, 12);
+coolTree.insert(20);
 coolTree.prettyPrint();
