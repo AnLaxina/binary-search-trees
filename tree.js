@@ -90,6 +90,16 @@ export default class Tree {
     traverse(this.root);
   }
 
+  // Height is defined as the number of edges from a particular node to a leaf node
+  height(value) {
+    let currentNode = find(value);
+
+    if (!currentNode) {
+      return null;
+    } else {
+    }
+  }
+
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
       return;
@@ -185,6 +195,18 @@ export default class Tree {
   }
 
   #findRecursively(root, value) {
+    if (root === null) {
+      return null;
+    } else if (value < root.value) {
+      return this.#findRecursively(root.left, value);
+    } else if (value > root.value) {
+      return this.#findRecursively(root.right, value);
+    } else {
+      return root;
+    }
+  }
+
+  #heightRecursively(root, value) {
     if (root === null) {
       return null;
     } else if (value < root.value) {
