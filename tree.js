@@ -13,6 +13,10 @@ export default class Tree {
     this.root = this.#deleteRecursively(this.root, valueToDelete);
   }
 
+  find(value) {
+    return this.#findRecursively(this.root, value);
+  }
+
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
       return;
@@ -105,5 +109,17 @@ export default class Tree {
     }
 
     return current;
+  }
+
+  #findRecursively(root, value) {
+    if (root === null) {
+      return null;
+    } else if (value < root.value) {
+      return this.#findRecursively(root.left, value);
+    } else if (value > root.value) {
+      return this.#findRecursively(root.right, value);
+    } else {
+      return root;
+    }
   }
 }
