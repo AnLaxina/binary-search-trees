@@ -17,6 +17,30 @@ export default class Tree {
     return this.#findRecursively(this.root, value);
   }
 
+  levelOrderForEach(callback) {
+    if(this.root === null) return null;
+    const queue = [this.root];
+
+    while(queue.length > 0) {
+        let currentNode = queue.shift();
+
+        if(typeof callback === "function") {
+            callback(currentNode);
+        }
+        else {
+            throw new Error("No callback function given!");
+        }
+
+        if(currentNode.left !== null) {
+            queue.push(currentNode.left);
+        }
+        if(currentNode.right !== null) {
+            queue.push(currentNode.right);
+        }
+    }
+
+  }
+
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
       return;

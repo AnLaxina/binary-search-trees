@@ -8,9 +8,7 @@ console.log("Here it is after insert:");
 coolTree.insert(20);
 coolTree.prettyPrint();
 
-console.log("Now, let's delete 20:");
-coolTree.deleteItem(20);
-coolTree.prettyPrint();
-
-console.log(`Let's find, 20: ${coolTree.find(20)}`);
-console.log(`Okay, it's null so.... let's find 3: ${coolTree.find(3).value}`);
+console.log("Level order traversal: ");
+coolTree.levelOrderForEach( (currentNode) => {
+    console.log(currentNode.value);
+});
