@@ -8,7 +8,8 @@ console.log("Here it is after insert:");
 coolTree.insert(20);
 coolTree.prettyPrint();
 
-console.log("Level order traversal: ");
-coolTree.levelOrderForEach( (currentNode) => {
-    console.log(currentNode.value);
+console.log("In order traveral: ");
+coolTree.inOrderForEach(function (node) {
+    console.log(node.value);
 });
+

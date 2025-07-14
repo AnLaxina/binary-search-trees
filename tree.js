@@ -18,27 +18,76 @@ export default class Tree {
   }
 
   levelOrderForEach(callback) {
-    if(this.root === null) return null;
+    if (this.root === null) return null;
     const queue = [this.root];
 
-    while(queue.length > 0) {
-        let currentNode = queue.shift();
+    while (queue.length > 0) {
+      let currentNode = queue.shift();
 
-        if(typeof callback === "function") {
-            callback(currentNode);
-        }
-        else {
-            throw new Error("No callback function given!");
-        }
+      if (typeof callback === "function") {
+        callback(currentNode);
+      } else {
+        throw new Error("No callback function given!");
+      }
 
-        if(currentNode.left !== null) {
-            queue.push(currentNode.left);
-        }
-        if(currentNode.right !== null) {
-            queue.push(currentNode.right);
-        }
+      if (currentNode.left !== null) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right !== null) {
+        queue.push(currentNode.right);
+      }
+    }
+  }
+
+  inOrderForEach(callback) {
+    if (this.root === null) return null;
+
+    if (typeof callback !== "function") {
+      throw new Error("No callback function given!");
     }
 
+    function traverse(node) {
+      if (node === null) return;
+      traverse(node.left);
+      callback(node);
+      traverse(node.right);
+    }
+
+    traverse(this.root);
+  }
+
+  preOrderForEach(callback) {
+    if (this.root === null) return null;
+
+    if (typeof callback !== "function") {
+      throw new Error("No callback function given!");
+    }
+
+    function traverse(node) {
+      if (node === null) return;
+      callback(node);
+      traverse(node.left);
+      traverse(node.right);
+    }
+
+    traverse(this.root);
+  }
+
+  postOrderForEach(callback) {
+    if (this.root === null) return null;
+
+    if (typeof callback !== "function") {
+      throw new Error("No callback function given!");
+    }
+
+    function traverse(node) {
+      if (node === null) return;
+      traverse(node.left);
+      traverse(node.right);
+      callback(node);
+    }
+
+    traverse(this.root);
   }
 
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
