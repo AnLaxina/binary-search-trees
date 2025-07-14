@@ -42,21 +42,51 @@ export default class Tree {
         return rootNode;
     }
 
-    #insertRecursively(node, newValue) {
-        if (node === null) {
+    #insertRecursively(root, newValue) {
+        if (root === null) {
             return new Node(newValue);
         }
         // Cannot insert duplicate values
-        if (newValue === node.value) {
-            return node;
+        if (newValue === root.value) {
+            return root;
         }
 
-        if (newValue < node.value) {
-            node.left = this.#insertRecursively(node.left, newValue);
+        if (newValue < root.value) {
+            root.left = this.#insertRecursively(root.left, newValue);
         } else {
-            node.right = this.#insertRecursively(node.right, newValue);
+            root.right = this.#insertRecursively(root.right, newValue);
         }
 
-        return node;
+        return root;
+    }
+
+    #deleteRecursively(root, valueToDelete) {
+        if (root === null) {
+            return root;
+        }
+
+        // Keep traversing either side of the tree until `valueToDelete` is found in the tree
+        if(valueToDelete < root.value) {
+            root.left = this.#deleteRecursively(root.left, valueToDelete);
+        }
+        else if(valueToDelete > root.value) {
+            root.right = this.#deleteRecursively(root.right, valueToDelete);
+        }
+        else {
+            // If there is a match, consider the edge cases
+
+            // 1. Root has 0 children or only right child
+            if(root.left === null) {
+                return root.right;
+            }
+
+            // 2. Root only has a left child
+            if(root.right === null) {
+                return root.left;
+            }
+
+            // 3. If both children are present
+            
+        }
     }
 }
