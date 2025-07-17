@@ -98,6 +98,10 @@ export default class Tree {
     return this.#heightRecursively(currentNode);
   }
 
+  depth(value) {
+    return this.#depthRecursively(this.root, value);
+  }
+
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
       return;
@@ -209,5 +213,24 @@ export default class Tree {
     const leftHeight = this.#heightRecursively(currentNode.left);
     const rightHeight = this.#heightRecursively(currentNode.right);
     return 1 + Math.max(leftHeight, rightHeight);
+  }
+
+  #depthRecursively(currentNode, valueToStopAt, currentDepth = 0) {
+    if (!currentNode) return null;
+    if (currentNode.value === valueToStopAt) return currentDepth;
+
+    if (valueToStopAt < currentNode.value) {
+      return this.#depthRecursively(
+        currentNode.left,
+        valueToStopAt,
+        currentDepth + 1
+      );
+    } else {
+      return this.#depthRecursively(
+        currentNode.right,
+        valueToStopAt,
+        currentDepth + 1
+      );
+    }
   }
 }

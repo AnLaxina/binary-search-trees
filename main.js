@@ -8,4 +8,4 @@ console.log("Here it is after insert:");
 coolTree.insert(20);
 coolTree.prettyPrint();
 
-console.log(`The height of 5 is: ${coolTree.height(5)}`);
+console.log(`The depth of 1 is: ${coolTree.depth(0)}`);
