@@ -92,12 +92,10 @@ export default class Tree {
 
   // Height is defined as the number of edges from a particular node to a leaf node
   height(value) {
-    let currentNode = find(value);
+    const currentNode = this.find(value);
+    if (!currentNode) return null;
 
-    if (!currentNode) {
-      return null;
-    } else {
-    }
+    return this.#heightRecursively(currentNode);
   }
 
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
@@ -206,15 +204,10 @@ export default class Tree {
     }
   }
 
-  #heightRecursively(root, value) {
-    if (root === null) {
-      return null;
-    } else if (value < root.value) {
-      return this.#findRecursively(root.left, value);
-    } else if (value > root.value) {
-      return this.#findRecursively(root.right, value);
-    } else {
-      return root;
-    }
+  #heightRecursively(currentNode) {
+    if (!currentNode) return -1;
+    const leftHeight = this.#heightRecursively(currentNode.left);
+    const rightHeight = this.#heightRecursively(currentNode.right);
+    return 1 + Math.max(leftHeight, rightHeight);
   }
 }

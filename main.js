@@ -8,8 +8,4 @@ console.log("Here it is after insert:");
 coolTree.insert(20);
 coolTree.prettyPrint();
 
-console.log("In order traveral: ");
-coolTree.inOrderForEach(function (node) {
-    console.log(node.value);
-});
-
+console.log(`The height of 5 is: ${coolTree.height(5)}`);
