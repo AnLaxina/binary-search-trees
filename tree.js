@@ -102,6 +102,10 @@ export default class Tree {
     return this.#depthRecursively(this.root, value);
   }
 
+  isBalanced() {
+    return this.#isBalancedRecursively(this.root);
+  }
+
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
       return;
@@ -232,5 +236,19 @@ export default class Tree {
         currentDepth + 1
       );
     }
+  }
+
+  #isBalancedRecursively(currentNode) {
+    // There are no available nodes, so the height here would be 0
+    if (currentNode === null) return true;
+
+    let leftHeight =  this.#heightRecursively(currentNode.left);
+    let rightHeight = this.#heightRecursively(currentNode.right);
+    let heightDifference = Math.abs(leftHeight - rightHeight);
+
+    const isLeftTreeBalanced = this.#isBalancedRecursively(currentNode.left);
+    const isRightTreeBalanced = this.#isBalancedRecursively(currentNode.right);
+
+    return (isLeftTreeBalanced && isRightTreeBalanced) && (heightDifference <= 1);
   }
 }
