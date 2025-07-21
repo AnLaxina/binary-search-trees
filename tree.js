@@ -106,6 +106,16 @@ export default class Tree {
     return this.#isBalancedRecursively(this.root);
   }
 
+  rebalance() {
+    if(this.isBalanced()) {
+      console.log("Already balanced! No need to rebalance");
+      return;
+    }
+    const nodeArray = [];
+    this.inOrderForEach(node => nodeArray.push(node));
+    this.root = this.#buildTree(nodeArray);
+  }
+
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
       return;
